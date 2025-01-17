@@ -3,109 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tính Tỷ lệ Chuyển đổi Thức ăn (FCR)</title>
+    <title>Tính FCR trong Chăn Nuôi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e9ecef;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
+            margin: 20px;
             padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f4f4f4;
         }
         h1 {
             text-align: center;
-            color: #333;
         }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input {
+        input[type="number"] {
+            width: 100%;
             padding: 10px;
-            width: calc(100% - 22px);
+            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 15px;
+            border-radius: 5px;
         }
         button {
-            padding: 10px 15px;
-            background-color: #28a745;
+            width: 100%;
+            padding: 10px;
+            background-color: #a72828;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            font-size: 16px;
         }
         button:hover {
             background-color: #218838;
         }
         .result {
             margin-top: 20px;
-            font-weight: bold;
-            color: #333;
+            font-size: 1.2em;
             text-align: center;
         }
-        .evaluation {
+        .message {
             margin-top: 10px;
-            font-weight: bold;
+            font-size: 1em;
             color: #007bff;
-            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tính Tỷ lệ Chuyển đổi Thức ăn (FCR)</h1>
-        <label for="foodIntake">Lượng thức ăn tiêu thụ (kg):</label>
-        <input type="number" id="foodIntake" placeholder="Nhập lượng thức ăn" required>
-        
-        <label for="weightGain">Trọng lượng tăng thêm (kg):</label>
-        <input type="number" id="weightGain" placeholder="Nhập trọng lượng tăng" required>
-        
-        <button onclick="calculateFCR()">Tính FCR</button>
-        
-        <div class="result" id="result"></div>
-        <div class="evaluation" id="evaluation"></div>
-    </div>
 
-    <script>
-        function calculateFCR() {
-            const foodIntake = parseFloat(document.getElementById('foodIntake').value);
-            const weightGain = parseFloat(document.getElementById('weightGain').value);
-            
-            if (isNaN(foodIntake) || isNaN(weightGain) || weightGain <= 0) {
-                document.getElementById('result').innerText = "Vui lòng nhập giá trị hợp lệ.";
-                document.getElementById('evaluation').innerText = "";
-                return;
-            }
-            
-            const fcr = foodIntake / weightGain;
-            document.getElementById('result').innerText = "FCR = " + fcr.toFixed(2);
-            
-            // Đánh giá FCR
-            let evaluationMessage = "";
-            if (fcr < 1.5) {
-                evaluationMessage = "FCR vật nuôi của bạn rất tốt! Tiêu thụ thức ăn hiệu quả bạn là một người chăn nuôi có trách nhiệm.";
-            } else if (fcr >= 1.5 && fcr <= 2.0) {
-                evaluationMessage = "FCR vật nuôi của bạn trung bình. Cần cải thiện hiệu quả tiêu thụ thức ăn.";
+<div class="container">
+    <h1>Tính FCR trong Chăn Nuôi</h1>
+    <label for="food">Lượng thức ăn tiêu thụ (kg):</label>
+    <input type="number" id="food" placeholder="Nhập lượng thức ăn" required>
+
+    <label for="weight">Trọng lượng tăng thêm (kg):</label>
+    <input type="number" id="weight" placeholder="Nhập trọng lượng tăng thêm" required>
+
+    <button onclick="calculateFCR()">Tính FCR</button>
+
+    <div class="result" id="result"></div>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    function calculateFCR() {
+        var food = parseFloat(document.getElementById('food').value);
+        var weight = parseFloat(document.getElementById('weight').value);
+
+        if (food > 0 && weight > 0) {
+            var fcr = (food / weight).toFixed(2);
+            document.getElementById('result').innerText = "FCR = " + fcr;
+
+            // Kiểm tra FCR tốt hay không
+            if (fcr <= 2) {
+                document.getElementById('message').innerText = "FCR vật nuôi của bạn rất tốt! Tiếp tục duy trì chế độ ăn uống hợp lý.";
             } else {
-                evaluationMessage = "FCR vật nuôicủa bạn không tốt. Vật nuôi của bạn có vấn đề hoặc vấn đề là ở bạn.";
+                document.getElementById('message').innerText = "FCR vật nuôi của bạn chưa tốt. Cần chỉnh lại chế độ ăn.";
             }
-            document.getElementById('evaluation').innerText = evaluationMessage;
+        } else {
+            document.getElementById('result').innerText = "Vui lòng nhập giá trị hợp lệ.";
+            document.getElementById('message').innerText = "";
         }
-    </script>
+    }
+</script>
 </body>
-<p>
-    FCR trong chăn nuôi là viết tắt của cụm từ Feed Conversation Ratio, nghĩa là tỉ lệ chuyển đổi thức ăn.
-    Hệ số này phản ánh hiệu suất của vật nuôi thông qua chuyển đổi khối lượng thức ăn đã tiêu tốn thành sản phẩm đầu ra mong muốn; bao gồm thịt, sữa, lông,...</p>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lời khuyên random</title>
+</head>
+<body>
 
+<h1>Lời khuyên random</h1>
+
+<button onclick="showRandomTip()">Hãy xem lời khuyên của tôi!</button>
+
+<p id="tip"></p>
+
+<script>
+const tips = [
+"Cung cấp cho vật nuôi của bạn với môi trường phù hợp",
+"Giữ sạch silo chứa thức ăn",
+"Sử dụng đúng loại máng ăn",
+"Đặt máng ăn và máng uống tại vị trí chính xác",
+"Không nên cho ăn qua nhiều",
+"Hệ thống chiếu sáng thích hợp phải được tuân theo",
+"Giữ cho đàn vật nuôi của bạn khỏe mạnh",
+"Tiêm vắc-xin phòng bệnh truyền nhiễm cho đàn vật nuôi của bạn",
+"Thực hiện theo các hướng dẫn trên thị trường"
+];
+
+function showRandomTip() {
+  const randomIndex = Math.floor(Math.random() * tips.length);
+  document.getElementById("tip").innerHTML = tips[randomIndex];
+}
+</script>
+</body>
 </html>
+
