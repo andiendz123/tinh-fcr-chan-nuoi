@@ -105,7 +105,7 @@
     </script>
 </body>
 <p>
-    FCR trong chăn nuôi là viết tắt của cụm từ Feed Conversation Ratio, nghĩa là tỉ lệ chuyển đổi thức ăn. </br>
+    FCR trong chăn nuôi là viết tắt của cụm từ Feed Conversation Ratio, nghĩa là tỉ lệ chuyển đổi thức ăn.
     Hệ số này phản ánh hiệu suất của vật nuôi thông qua chuyển đổi khối lượng thức ăn đã tiêu tốn thành sản phẩm đầu ra mong muốn; bao gồm thịt, sữa, lông,...</p>
 
 </html>
